@@ -58,9 +58,11 @@ for (idade in idades) {
   sdY1_2 <- c(sdY1_2, media + sd(dados_intervalo$NU_NOTA_REDACAO))
 }
 
+idades_legenda = lapply(idades, function(x) paste("[", x, "..", x + 9, "]"))
+
 cores <- c(rgb(0.2,0.1,0.1,0.6), rgb(0.2,0.8,0.8,0.6), rgb(1, 1, 1,0.6))
 plot <- barplot(
-  medias_2, names.arg = idades,
+  medias_2, names.arg = idades_legenda,
   main = "Notas Por Intervalo de Idades",
   xlab="Intervalo de Idades", ylab="Notas",
   width = 0.9, ylim = c(0, 1000),
@@ -75,23 +77,25 @@ arrows(plot, sdY0_2, plot, sdY1_2, angle=90, code=3, length = 0.05)
 
 df3 <- df[c(117,111)] 
 
-a = c(0)
-b = c(1:998)
-c = c(999:1497)
-d = c(1498:1996)
-e = c(1997:2495)
-f = c(2496:2994)      
-g = c(2995:3992)   
-h = c(3993:4990)   
-i = c(4991:5988)   
-j = c(5989:6986)   
-k = c(6987:7964)   
-l = c(7955:8982)   
-m = c(8983:9980)   
-n = c(9981:11976)   
-o = c(11977:14970)   
-p = c(14971:19960)   
-q = c(19960)
+legenda_renda = c(
+  "Nenhuma renda",
+  "Até R$998,00",    
+  "De R$998,01 até R$1497,00",    
+  "De R$1.497,01 até R$1.996,00",    
+  "De R$1.996,01 até R$2.495,00",    
+  "De R$2.495,01 até R$2.994,00",    
+  "De R$2.495,01 até R$3.992,00",    
+  "De R$3.992,01 até R$4.990,00",    
+  "De R$4.990,01 até R$5.988,00",    
+  "De R$5.988,01 até R$6.986,00",    
+  "De R$6.986,01 até R$7.964,00",    
+  "De R$7.964,01 até R$8.982,00",    
+  "De R$8.982,01 até R$9.980,00",    
+  "De R$9.980,01 até R$11.976,00",    
+  "De R$11.976,01 até R$14.970,00",    
+  "De R$14.970,01 até R$19.960,00",    
+  "Mais de R$19.960,00"    
+)
 
 medias_3 <- c()
 sdY0_3 <- c()
@@ -113,12 +117,18 @@ for (renda in rendas) {
 }
 
 cores <- c(rgb(0.2,0.1,0.1,0.6), rgb(0.2,0.8,0.8,0.6), rgb(1, 1, 1,0.6))
+
+## Increase bottom margin to make room for rotated labels
+
+par(mar = c(16, 6, 6, 6)) 
+
 plot <- barplot(
-  medias_3, names.arg = rendas,
+  medias_3, names.arg = legenda_renda,
   main = "Média de Notas por Renda",
-  xlab="Renda", ylab="Notas",
+  ylab="Notas",
   width = 0.9, ylim = c(0, 1000),
-  col=cores
+  col=cores, las = 2
 )
 
+mtext(1, text = "Renda", line = 13)
 arrows(plot, sdY0_3, plot, sdY1_3, angle=90, code=3, length = 0.05)

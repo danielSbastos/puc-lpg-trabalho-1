@@ -1,7 +1,7 @@
-# puc-lpg-trabalho-1
+# LPG - Trabalho R
 
 Para executar o arquivo principal, executar:
 
 ```sh
-$ Rscript main.r
+$ Rscript main.R
 ```

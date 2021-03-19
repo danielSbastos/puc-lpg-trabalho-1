@@ -1,4 +1,4 @@
-setwd("~/Downloads") #definir espaço de trabalho
+setwd("~/Downloads") # definir espaço de trabalho
 
 df <- read.csv("dados.csv") #importar datframe
 
@@ -26,7 +26,7 @@ for (estado in estados) {
 cores <- c(rgb(0.2,0.1,0.1,0.6), rgb(0.2,0.8,0.8,0.6), rgb(1, 1, 1,0.6))
 plot <- barplot(
   medias, names.arg = estados,
-  main = "Notas Por Estado",
+  main = "Média de Notas Por Estado",
   xlab="Estados", ylab="Notas",
   width = 0.9, ylim = c(0, 1000),
   col=cores
@@ -47,7 +47,6 @@ idades <- seq(from = min(df2$NU_IDADE), to = max(df2$NU_IDADE), by = 10)
 dados <- df2[complete.cases(df2),]
 
 for (idade in idades) {
-  print(idade)
   dados_intervalo <- dados[(dados$NU_IDADE >= idade),]
   dados_intervalo <- dados_intervalo[(dados_intervalo$NU_IDADE < (idade + 10)),]
   
@@ -63,7 +62,7 @@ idades_legenda = lapply(idades, function(x) paste("[", x, "..", x + 9, "]"))
 cores <- c(rgb(0.2,0.1,0.1,0.6), rgb(0.2,0.8,0.8,0.6), rgb(1, 1, 1,0.6))
 plot <- barplot(
   medias_2, names.arg = idades_legenda,
-  main = "Notas Por Intervalo de Idades",
+  main = "Média de Notas por Intervalo de Idades",
   xlab="Intervalo de Idades", ylab="Notas",
   width = 0.9, ylim = c(0, 1000),
   col=cores
@@ -117,8 +116,6 @@ for (renda in rendas) {
 }
 
 cores <- c(rgb(0.2,0.1,0.1,0.6), rgb(0.2,0.8,0.8,0.6), rgb(1, 1, 1,0.6))
-
-## Increase bottom margin to make room for rotated labels
 
 par(mar = c(16, 6, 6, 6)) 
 

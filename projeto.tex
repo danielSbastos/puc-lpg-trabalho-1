@@ -19,13 +19,10 @@
 \usepackage{hyperref}
 \usepackage{graphicx,url}
 \usepackage{fancyvrb}
-
 \usepackage[pdftex]{hyperref}
-
 \usepackage{subfig}
-
-%\usepackage[brazil]{babel}   
 \usepackage[utf8]{inputenc}  
+
 \hypersetup{
     colorlinks=true,
     urlcolor=blue,
@@ -33,10 +30,8 @@
     
 \sloppy
 
-\title{Trabalho sobre Sintaxe e Semântica de Linguagens de Programação
-}
-\author{Daniel S. Bastos\inst{1}, Lucas M. S. Freitas\inst{2}, Rossana O. Souza \inst{3} }
-
+\title{Trabalho sobre Sintaxe e Semântica de Linguagens de Programação}
+\author{Daniel S. Bastos\inst{1}, Lucas M. S. Freitas\inst{1}, Rossana O. Souza \inst{1} }
 \address{Pontificia Universidade Católica de Minas Gerais
 (PUC MG)\\
 Rua Cláudio Manuel, 1.162 -- Funcionarios -- Belo Horizonte -- MG -- Brazil
@@ -50,38 +45,40 @@ Rua Cláudio Manuel, 1.162 -- Funcionarios -- Belo Horizonte -- MG -- Brazil
 
 Esse texto é um guia introdutório da linguagem R, com o intuito de brevemente explicar os conteúdos de aplicações, estrutura de dados, tipos, paradigmas, estruturas de controle, funções e tópicos avançados, como concorrência e paralelismo, presentes na linguagem.
 
-O repositório da aplicação prática está localizado no \href{https://github.com/danielSbastos/puc-lpg-trabalho-1}{Github}, onde o arquivo contendo o código e o \texttt{main.R}, e o vídeo final no \href{https://github.com/danielSbastos/puc-lpg-trabalho-1}{YouTube}.
+O repositório da aplicação prática está localizado no \href{https://github.com/danielSbastos/puc-lpg-trabalho-1}{Github}, no qual o arquivo contendo o código é o \texttt{main.R}, e o vídeo final no \href{https://youtu.be/iBmmmesPYok}{YouTube}.
 
 \section{Aplicações da Linguagem R} \label{sec:Aplicações da Linguagem R}
-Essencialmente a linguagem R foi desenvolvida para Estátistica, dessa forma ela possui inúmeras estruturas que auxiliam o desenvolvimente nessa área como, técnicas estátisticas de modelagem, classificação, testes estatísticos, agrupamento e técnicas gráficas para construção de gráficos.
+Essencialmente a linguagem R foi desenvolvida para a estatística, dessa forma ela possui inúmeras estruturas que auxiliam no desenvolvimento, tais como técnicas estatísticas de modelagem, classificação, testes estatísticos, agrupamento e técnicas gráficas para construção de gráficos.
 
-Possuí também inumeros simbolos matemáticos e a possibilidade de representar numeros imaginários. Esses aspectos fazem a linguagem se destacar além da estátisticas nas áreas de ánalise de dados e Machine Learning.
+Possui também uma gama de símbolos matemáticos e a possibilidade de representar números imaginários. Estes aspectos fazem a linguagem se destacar em áreas além da estatísica, como a de análise de dados e machine learning.
 
-R é uma linguagem funcional com suporte para orientação à objetos (OO), podendo assim ser considerada multiparadigma. Tudo em R é um objeto, então funcional e OO sempre andam juntos.
+R é uma linguagem funcional com suporte para orientação a objetos (OO), podendo assim ser considerada multiparadigma. Tudo em R é um objeto, então sempre há uma constante interação entre o paradigma funcional e OO.
 
-\section{Dados e suas Estruturas} \label{sec:Dados e suas Estruturas}
-A linguagem R possui 6 tipos de dados primitivos ou básicos, sendo eles: Character, numeric, integer, local, complex.
+\section{Caraterísticas da Linguagem} \label{sec:Caraterísticas da Linguagem}
+A linguagem R possui 6 tipos de dados primitivos ou básicos, sendo eles: character, numeric, integer, local e complex.
 
-    A declaração de definição de uma variavel estão sempre ligados, não é possível declarar uma variável sem definir ela ao mesmo tempo.
+A declaração e definição de uma variável são realizadas simultâneamente, não é possível declarar uma variável sem definí-la ao mesmo tempo.
 
+Maneira incorreta:
 \begin{verbatim}
-// Não vai funcionar:
-        a
-        a <- 2
-// Maneira correta:
-        a <-2
-        a
+    a
+    a <- 2
+\end{verbatim}
+
+Maneira correta:
+\begin{verbatim}
+    a <- 2
+    a
 \end{verbatim}
 
 \subsection{Type Binding}
-
-    R assim como javaScript utiliza Associação estática de tipo Implicíta, ou seja, não é necessário uma instrução dizendo qual o tipo de variável, as variáveis são associadas da forma como são escritas.
+    R, assim como JavaScript, utiliza associação estática de tipo implicíta, ou seja, não é necessário uma instrução definindo o tipo da variável, as variáveis são associadas ao tipo atribuído à elas no momento em que são declaradas.
 
 \begin{verbatim}
-    a <- "123" - character
-    b <- 123 - numeric
-    c <- 123.5 - numeric (double)
-    d <- 123L - integer
+    a <- "123" # character
+    b <- 123   # numeric
+    c <- 123.5 # numeric (double)
+    d <- 123L  # integer
 \end{verbatim}
     Agora, vejamos um exemplo mais curioso:
 \begin{verbatim}
@@ -89,22 +86,22 @@ A linguagem R possui 6 tipos de dados primitivos ou básicos, sendo eles: Charac
     a = "Linguagens de Programação"
 \end{verbatim}
 
-Nesse caso a variável "a" sofreu uma modificação, não apenas de valor, mas de tipo, valor e tamanho. Ela passou de inteiro para string sem maiores problemas. Por ser uma linguagem não tipada a reatribuição de variáveis é algo muito comum e muito simples de ser implementado.
+Nesse caso a variável \texttt{a} sofreu uma modificação, não apenas de valor, mas de tipo, valor e tamanho. Ela passou de inteiro para string sem maiores problemas. Por ser uma linguagem não tipada a reatribuição de variáveis é algo muito comum e muito simples de ser implementado.
 
 \subsection{Estruturas de Dados}
-R possui 5 estruturas de dados sendo elas: Vector, List, Matrix, Data Frame, Factors
+R possui 5 estruturas de dados, sendo elas: Vector, List, Matrix, DataFrame e Factors.
 
 \subsection{Vector}
 Estrutura de dados mais simples, armazena um conjunto de dados que pode ser de qualquer tipo, numeric, integer, character, logical ou complex. Um vetor pode armazenar por vez apenas um tipo de dado.
-    Para declarar um vetor é necessário utilizar a função c() :
+    Para declarar um vetor é necessário utilizar a função \texttt{c()}:
     
     \begin{verbatim}
-    a <- c(1, 2, 3, 4) // vetor do tipo numeric
-    b <- c("1", 2, 3, 4) // Tudo será convertido para char
-    c <- c("f", 2, 3, 4) // Isso irá provocar um erro
+    a <- c(1, 2, 3, 4)   # Vetor do tipo numeric
+    b <- c("1", 2, 3, 4) # Tudo será convertido para char
+    c <- c("f", 2, 3, 4) # Isso irá provocar um erro
     \end{verbatim}
-    
-Como descrito no início, tudo em R é um objeto e é uma linguagem OO também, assim, pode-se utilizar o vetor como objeto para criar uma classe com seus atributos em R. Por exemplo:
+
+Como mencionado anteriormente, tudo em R é um objeto e como esta é uma linguagem do paradigma OO é possível utilizar-se de um vetor para criar uma classe com atributos. Por exemplo:
 
     \begin{verbatim}
     d <- c(nome = "Maria", idade = "19") 
@@ -117,51 +114,54 @@ Como descrito no início, tudo em R é um objeto e é uma linguagem OO também, 
     \end{verbatim}
 
 \subsection{List}
-Listas são estruturas mais complexas que vetores, por armazenar diferentes tipos de dados de uma unica vez, até mesmo vetores dentro delas.
-    Para declarar uma lista é necessário utilizar a função list() :
+Listas são estruturas mais complexas que vetores, por armazenar diferentes tipos de dados de uma única vez, até mesmo vetores dentro delas.
+    Para declarar uma lista é necessário utilizar a função \texttt{list()}:
 \begin{verbatim}
 b <- list(12, "Samuel", 3, 6)
 str(b)
-    Output:
-    list of 4
-    $ : num 12 | $ : char "Samuel" |$ : num 3 |$ : num 6
-// lista com vetor
-b <- list(c(11,23,53,40),"Sara", 4)
+    # List of 4
+    # $ : num 12
+    # $ : char "Samuel"
+    # $ : num 3
+    # $ : num 6
+    
+b <- list(c(11, 23, 53, 40), "Sara", 4) # lista com vetor
 b[[1]][1]
-
-    Output: 11
+    # 11
 \end{verbatim}
 
 \subsection{Matrix}
-    Matrizes são bem parecidas com vetores, assim como eles uma matriz só pode conter 1 tipo de dado por vez, sua maior diferença está na dimensão, enquanto vetores são de 1 dimensão, matrizes podem ser de 1 ou mais dimensões, dessa forma contendo linhas e colunas.
-    Para declarar uma matriz é necessário utilizar a função matrix(valores, linhas): \texttt{m <- matrix(1:9, nrow=3)}
+    Matrizes são bem parecidas com vetores, assim como eles uma matriz só pode conter um tipo de dado por vez, sua maior diferença está na dimensão, enquanto vetores são de uma dimensão, matrizes podem ser de uma ou mais dimensões, dessa forma contendo linhas e colunas.
+    Utiza-se da função \texttt{matrix(valores, linhas)} para declarar uma matriz: \texttt{m <- matrix(1:9, nrow=3)}
     
-\subsection{Data frame}
-    Data frame é uma das estrururas mais complexas da linguagem, a grosso modo funciona como uma matriz que aceita varios tipos de valores. Esse tipo de estrutura é muito utilizado para ler grandes volumes de dados. Para declarar um data frame é necessário ler uma base de dados através da função read. \texttt{df <- read.csv("DataFrame.csv")}
-
+\subsection{DataFrame}
+    DataFrame é uma das estruturas mais complexas da linguagem. De maneira sucinta, funciona como uma matriz que aceita varios tipos de valores. Esse tipo de estrutura é muito utilizado para ler grandes volumes de dados. Para declarar um DataFrame é necessário ler uma base de dados através da função \texttt{read}: \texttt{df <- read.csv("arquivo.csv")}
 
 \subsection{Factor}
- Fatores são um tipo de estrutura de dados que categoriza e conta ocorrência de valores, exemplo:
+ Fator é um tipo que categoriza e conta a ocorrência de valores, por exemplo:
  \begin{verbatim}
-vetor <- c(400, 550, 300, 400) // isso é um vetor
-fator <- as.factor(vetor) // tranformar um vetor para o tipo fator
+vetor <- c(400, 550, 300, 400) # isso é um vetor
+fator <- as.factor(vetor) # converter para o tipo factor
 summary(fator)
-    output:
-    300 400 550 // valores categorizados
-    1   2   1   // quantidade de vezes que cada um apareceu
+    # 300 400 550 -> valores categorizados
+    # 1   2   1   -> quantidade de vezes que cada um apareceu
  \end{verbatim}
 
-\section{Escopo Lexico} \label{sec:Escopo Lexico}
-    R se utiliza do escopo lexico, a associação de variáveis ocorre pelo uso mais próximo, exemplo:
+\section{Escopo Léxico} \label{sec:Escopo Lexico}
+    R utiliza o escopo léxico (ou estático), portanto, os valores de variáveis são definidos pelo seu ambiente de nível superior, e não pela pilha de chamadas, exemplo:
     \begin{verbatim}
 y <- 2
- 
 f <- function(x) {
-         y <- 10
-         y^2 + x
+    y**2 + x
 }
+g <- function(x) {
+    y <- 10
+    f(x)
+}
+g(3)
+# 7
     \end{verbatim}
-Sendo o valor de x = 3 o resultado será : 7 
+Sendo o valor de x = 3 o resultado será: 7. Caso o escopo fosse dinâmico, o resultado seria 103.
 
 \section{Estruturas de Controle} \label{sec:Comandos de Execução}
 
@@ -191,7 +191,7 @@ Há dezenas de comandos de execução e estruturas de controle em R, portanto, e
  Relação&Operador&Emprego\\ \midrule
  \hline
  E & \begin{math} \&\& \end{math} & \begin{math}X>10 \&\& Y>0 \end{math}0\\
- OU &\begin{math} || \end{math} & \begin{math} X>10  ||  Y<0 \end{math}\\
+ OU &\begin{math} || \end{math} & \begin{math} X>10  || Y<0 \end{math}\\
  NÃO & \begin{math} ! \end{math} & \begin{math} !(X>10) \end{math}\\ \bottomrule
  \end{tabular}}
 \end{table}
@@ -200,42 +200,42 @@ Estrutura Condicional (if) e Laço Iterador (for e while):
 
 \begin{verbatim}
     if(condição){
-        <statement if TRUE>
+        <instrução se TRUE>
     }
-    for (<variable> in <set>){
-        <statements>
+    for (<variável> in <set>){
+        <instruções>
     }
-    while(<condition>){
-        <statments while TRUE>
+    while(<condição>){
+        <instrução enquanto TRUE>
     }
 \end{verbatim}
 
-Uma estrutura de repetição não comum com outras linguagens mais populares é o comando repeat. Nesse caso o loop também é executado enquanto as condições forem "true", "break" e "next" podem ser usados para interromper a repetição.
+Uma estrutura de repetição não comum com outras linguagens mais populares é o comando repeat. Nesse caso o loop também é executado enquanto as condições forem \texttt{true}. É possível interromper a repetição utilizando-se \texttt{break} ou \texttt{next}.
 
 \begin{verbatim}
     repeat {
-    <statement before 1st condition>
-    if(<1st condition>) break
-        <statements before 2nd condition>
-    if(<2nd condition>) break
-        <statement after 2nd condition>
+    <instrução antes da condição 1>
+    if(<condição 1>) break
+        <instrução antes da condição 2>
+    if(<condição 2>) break
+        <instrução depois da condição 2>
     }
 \end{verbatim}
 
-Veja agora uma estrutura que é comum com a linguagem tipada C. A estrutura de casos switch pode representar "if else if" planas. A condição de cada caso é sempre uma igualdade e geralmente o switch é usado para igualdade de valores entre strings.
+Veja agora uma estrutura que é comum com a linguagem tipada C. A estrutura de casos switch pode representar \texttt{if else if} planas. A condição de cada caso é sempre uma igualdade e geralmente o switch é usado para igualdade de valores entre strings.
 
 \begin{verbatim}
-    switch(<element>,
-        <value_1> = { <statement 1st condition> },
-        <value_2> = { <statement 2nd condition> },
-        { <statement last condition> }
+    switch(<variável>,
+        <valor 1> = { <instrução da condição 1> },
+        <valor 2> = { <instrução da condição 2> },
+        { <instrução da última condição> }
 \end{verbatim}
 
 \section{Funções} \label{sec:Funções}
 
-Funções são um aspecto muito poderoso da linguagem R, elas atuam como objetos e, portanto, podem ser usadas como parâmetro e são tratadas como "objetos de primeira classe". É possível ainda usar funções dentro de funções.
+Funções são uma construção muito poderoso da linguagem R, elas atuam como objetos e, portanto, podem ser usadas como parâmetro e são tratadas como "objetos de primeira classe". É possível ainda usar funções dentro de funções.
 
-Um importante fator que caracteriza uma linguagem funcional é ter estes objetos de primeira classe e de também alta ordem. No exemplo abaixo, para cada item da lista é calculado a média, também há um objeto de primeira classe, a função "mean", e o de alta ordem, a função "lapply".
+Um importante fator que caracteriza uma linguagem funcional é ter estes objetos de primeira classe e de também alta ordem. No exemplo abaixo, para cada item da lista é calculado a média, também há um objeto de primeira classe, a função \texttt{mean}, e o de alta ordem, a função \texttt{lapply}.
 
 \begin{verbatim}
     lapply(list(1:10, 1:4, 1:30), mean)
@@ -252,43 +252,43 @@ Algumas operações são tão recorrentes que já possuem funções prontas para
 \begin{verbatim}
     a = "João"
     b = "Silva"
-    c = ("joão", " ", "silva")
+    c = c(a, " ", b) # c = João Silva
 \end{verbatim}
 
-No exemplo acima a ação de combinar valores pode ser feita através do pacote stringr com a utilização da função c. Com ela é possível combinar indefinidos valores com parâmetros de variáveis ou utilizando o próprio texto como parâmetro, como foi feito com o espaço entre o nome e o sobrenome no exemplo mostrado anteriomente. No exemplo a seguir pode-se observar um outro tipo função, a função recursiva.
+No exemplo acima a ação de combinar valores pode ser feita através do pacote "stringr" com a utilização da função \texttt{c}. Com ela é possível combinar indefinidos valores passando-os como parâmetros, sejam eles variáveis ou textos, como foi feito com o espaço entre o nome e o sobrenome no exemplo mostrado anteriomente. No exemplo a seguir pode-se observar um outro tipo função, a função recursiva.
 
 Função não recursiva
 
 \begin{verbatim}
-fatorial=function(n) {
-if(n%%1!=0 || n<0 || is.numeric(n)) stop(“erro”)                    
-   aux=1
-   for (i in 1:n){
-      aux=i*aux
-   }
-   return(aux)
+fatorial = function(n) {
+  if (n%%1!=0 || n<0) stop("erro")   
+  else if (n == 0) return(1)
+  aux=1
+  for (i in 1:n) {
+    aux=i*aux
+  }
+  return(aux)
 }
 \end{verbatim}
 
 Função  recursiva
 
 \begin{verbatim}
-fatorialrec=function(n){
-   if(n%%1!=0 || n<0 || is.numeric(n))
-      stop(“erro”)
-      if(n==1 || n==0) return(1)
-   return(fatorialrec(n-1)*n)
+fatorialrec = function(n){
+  if (n%%1!=0 || n<0) stop("erro")
+  else if (n==1 || n==0) return(1)
+  return(fatorialrec(n-1) * n)
 }
 \end{verbatim}
 
-Como pode ser observado, a recursividade se trata da capacidade da função de fazer uma chamada para si mesma, isso pode tornar o programa mais conciso, mas não necessariamente mais complexo. Perceba que, enquanto a função não recursiva utilizou sete linhas, a segunda se utilizou de apenas 4. 
+Como pode ser observado, a recursividade se trata da capacidade da função de fazer uma chamada para si mesma, isso pode tornar o programa mais conciso, mas não necessariamente mais complexo. Perceba que, enquanto a função não recursiva utilizou sete linhas, a segunda se utilizou de apenas três. 
 
 \section{Tópicos Avançados} \label{sec:Tópicos Avançados}
 \subsection{Concorrência e Paralelismo}
 
 Até agora todos os exemplos de código executam de forma sequencial. Para cenários onde a quantidade de dados é pequena e o tempo de execução não é um limitante, o processamento sequencial é suficiente, porém a medida que a quantidade e o tempo aumentam a ponto de se tornarem inviáveis, outras formas além do processamento sequencial devem ser exploradas, e essas são o paralelo e concorrente.
 
-Os pacotes "future", "snow" e "foreach" provêm ferramentas para processamento concorrente e paralelo. O "future", em específico, tem o conceito de representar uma operação que não é necessária no instante que foi definida, podendo assim ser executada em background quando requerida. O próprio pacote resolve e otimiza em qual momento uma tarefa deve pausar para outra executar, e quando essa pode resumir, assim dando suporte à concorrência. 
+O pacote "future" provê ferramentas para processamento concorrente e paralelo. Este tem o conceito de representar uma operação que não é necessária no instante que foi definida, podendo assim ser executada em background quando requerida. O próprio pacote resolve e otimiza em qual momento uma tarefa deve pausar para outra executar, e quando essa pode resumir, assim dando suporte à concorrência. 
 
 O exemplo abaixo utiliza o pacote "future"
 
@@ -300,7 +300,7 @@ O exemplo abaixo utiliza o pacote "future"
     v = c(value(fa), value(fb)) # 3
 \end{verbatim}
 
-Na linha 1 e 2 há duas operações , "fa" e "fb", ambas não necessárias no momento que são definidas. Elas serão somente necessárias na linha 3, que irá executar de forma paralela em CPUs com mais de um núcleo. 
+Na linha 1 e 2 há duas operações , \texttt{fa} e \texttt{fb}, ambas não necessárias no momento que são definidas. Elas serão somente necessárias na linha 3, que irá executar de forma paralela em CPUs com mais de um núcleo. 
 
 \section{References}
 R PROGRAMMING for Data Science. [S. l.], 3 set. 2020. Disponível em: \url{https://bookdown.org/rdpeng/rprogdatascience}. Acesso em: 6 mar. 2021
@@ -312,4 +312,3 @@ A FUTURE for R: A Comprehensive Overview. [S. l.], 2015. Disponível em: \url{ht
 ESTATÍSTICA é com R!. In: Estatística é com R!. [S. l.], 17 maio 2015. Disponível em: \url{http://www.estatisticacomr.uff.br/?p=98#:~:text=Recurs%C3%A3o%20ou%20recursividade%20pode%20ser,que%20seu%20similar%20sem%20recurs%C3%A3o}. Acesso em: 7 mar. 2021.
 
 \end{document}
-
